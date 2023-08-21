@@ -132,6 +132,31 @@ return {
       return {}
     end,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    cmd = "Neotree",
+    keys = {
+      { "<leader>fe", false },
+      { "<leader>fE", false },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+        end,
+        desc = "Explorer NeoTree (root dir)",
+        remap = true,
+      },
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+        remap = true,
+      },
+    },
+  },
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
