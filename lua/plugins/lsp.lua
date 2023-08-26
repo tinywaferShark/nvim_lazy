@@ -1,5 +1,5 @@
+local util = require("lspconfig.util")
 return {
-
   -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
@@ -16,7 +16,14 @@ return {
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
-        verible = {},
+        -- verible
+        -- doc https://github.com/chipsalliance/verible/blob/master/verilog/tools/lint/README.md
+        -- lint rule  https://chipsalliance.github.io/verible/verilog_lint.html
+        verible = {
+          cmd = { "verible-verilog-ls", "--rules_config_search" },
+          filetypes = { "systemverilog", "verilog" },
+          root_dir = util.find_git_ancestor,
+        },
       },
     },
   },
